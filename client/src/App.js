@@ -1,11 +1,14 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import'./Components/Scraper/Scraper'
+import Scraper from './Components/Scraper/Scraper';
 
 function App() {
 
   return (
     <div className="App">
+      <Scraper/>
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>

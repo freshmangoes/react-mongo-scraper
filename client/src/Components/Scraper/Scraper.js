@@ -1,27 +1,25 @@
-import React, {useState, useEffect} from 'react'
-import '../../utils/api';
-import api from '../../utils/api';
+import React, { useState, useEffect } from 'react';
+import API from '../../utils/API';
 
 const Scraper = () => {
-  const [state, setState] = {};
+	const [state, setState] = useState({});
 
-  // useEffect( () => {}); 
+	const testScraper = async () => {
+		try {
+			const data = await API.scrape();
+			console.log('Scrape.js Data::', data);
+			setState(data);
+		} catch (err) {
+			console.log('error in Scraper.js');
+			console.log(err);
+		}
+	};
 
-  const testScraper = async () => {
-    try {
-      const data = await api.scrape();
-      console.log('Scrape.js Data::', data);
-    } catch (err) {
-      console.log('error in Scraper.js');
-      console.log(error);
-    }
-  }
+	useEffect(() => {
+		testScraper();
+	});
 
-  return (
-    <div>
-      
-    </div>
-  )
-}
+	return <div></div>;
+};
 
-export default Scraper
+export default Scraper;
