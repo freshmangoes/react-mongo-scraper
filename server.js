@@ -10,17 +10,18 @@ const apiRoutes = require('./routes/apiRoutes');
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 // Serve up static assets (usually on heroku)
-const root = require('path').join(__dirname, 'client', 'build');
-app.use(express.static(root));
+if (process.env.NODE_ENV === 'production') {
+	app.use(express.static('client/build'));
+}
 
 // use apiRoutes
-app.use('/api', apiRoutes);
+app.use(apiRoutes);
 
-app.get('*', (req, res) => {
-	res.sendFile('index.html', {
-		root,
-	});
-});
+// app.get('*', (req, res) => {
+// 	res.sendFile('index.html', {
+// 		root,
+// 	});
+// });
 
 app.listen(PORT, () => {
 	console.log(`🌎 ==> API server now on port ${PORT}!`);

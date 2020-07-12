@@ -6,9 +6,9 @@ const Scraper = () => {
 
 	const testScraper = async () => {
 		try {
-			const data = await API.scrape();
-			console.log('Scrape.js Data::', data);
-			setState(data);
+			const response = await API.scrape();
+			// console.log(`response.data:: ${JSON.stringify(response.data, null, 2)}`);
+			setState(response.data);
 		} catch (err) {
 			console.log('error in Scraper.js');
 			console.log(err);
@@ -17,9 +17,9 @@ const Scraper = () => {
 
 	useEffect(() => {
 		testScraper();
-	});
+	}, []);
 
-	return <div></div>;
+return <div>{console.log(state)}</div>;
 };
 
 export default Scraper;
