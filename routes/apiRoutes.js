@@ -32,7 +32,7 @@ router.get('/scrape', async (req, res) => {
 				});
 			});
 		console.log(results);
-		res.json(results);
+		res.send(results);
 	} catch (error) {
 		console.log(error);
 	}
