@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 
-
+const mongoose = require('mongoose');
 const PORT = process.env.PORT || 3001;
 const app = express();
 const apiRoutes = require('./routes/apiRoutes');
@@ -16,6 +16,12 @@ if (process.env.NODE_ENV === 'production') {
 
 // use apiRoutes
 app.use(apiRoutes);
+
+// Connect to MongoDB
+
+// TODO :: create mongodb database and collections for this DB
+const DB = `nytheadlines`;
+mongoose.connect(process.env.MONGODB_URI || `mongodb://localhost/${DB}`);
 
 // app.get('*', (req, res) => {
 // 	res.sendFile('index.html', {

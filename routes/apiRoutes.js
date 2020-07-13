@@ -1,11 +1,15 @@
+// API endpoints and logic for scraper live here.
+// Will eventually push the scraped data to MongoDB, and have
+// separate endpoints for getting the scraped articles from the DB.
+
 const axios = require('axios');
 const cheerio = require('cheerio');
 const router = require('express').Router();
 
+const db = require('../models');
+
 router.get('/scrape', async (req, res) => {
 	const url = 'https://www.nytimes.com/section/world';
-	// const url = 'https://google.com'
-	// const url = 'https://sfbay.craigslist.org/search/mcy?query=honda&sort=rel';
 
 	try {
 		const data = await axios.get(url);
@@ -17,7 +21,7 @@ router.get('/scrape', async (req, res) => {
 			// finds each article element
 			.find('article')
 			// scrapes through each article element, using elem as 'each'
-			.each(function (i, elem) {
+			.each(async function (i, elem) {
 				// grabs h2 element for the headline
 				let headline = $(elem).find('h2').text();
 				// grabs p element for the summary
@@ -35,17 +39,32 @@ router.get('/scrape', async (req, res) => {
 				console.log('------------------------------');
 
 				// gathers all elements and pushes it to the results array
-				results.push({
+				// results.push({
+				// 	headline,
+				// 	summary,
+				// 	imgSrc,
+				// 	link: 'https://nytimes.com/' + link,
+				// });
+
+				// inserts article into mongoDB
+				await db.Article.create({
 					headline,
 					summary,
-					imgSrc,
-					link: 'https://nytimes.com/' + link,
+					link,
+					imgSrc
 				});
+
+				const testArticle = await db.Article.find({headline});
+				console.log('testArticle::', testArticle);
 			});
-		console.log(results);
+
+		
+		// console.log(results);
 
 		// passes results back to client
-		res.send(results);
+		// res.send(results);
+
+
 	} catch (error) {
 		console.log(error);
 	}

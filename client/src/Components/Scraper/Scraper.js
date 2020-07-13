@@ -8,7 +8,10 @@ const Scraper = () => {
 		try {
 			// gets response from API endpoint '/scrape/
 			const response = await API.scrape();
+
+			// NOTE :: DEBUG
 			console.log('response.data::', ...response.data);
+
 			// sets state to response
 			setState([...response.data]);
 		} catch (err) {
@@ -17,6 +20,8 @@ const Scraper = () => {
 		}
 	};
 
+	// NOTE :: DEBUG
+	// ---------------------------------
 	const printState = () => {
 		// iterating through state array
 		for (let i = 0; i < state.length; i++) {
@@ -24,7 +29,9 @@ const Scraper = () => {
 			\nSummary:: ${state[i].summary}`);
 		}
 	};
+	// ---------------------------------
 
+	// TODO :: this currently just calls testScraper(), which will eventually render data from the DB instead of directly scraped data
 	useEffect(() => {
 		testScraper();
 	}, []);
