@@ -7,6 +7,7 @@ const cheerio = require('cheerio');
 const router = require('express').Router();
 
 const db = require('../models');
+const e = require('express');
 
 router.get('/scrape', async (req, res) => {
 	const url = 'https://www.nytimes.com/section/world';
@@ -29,14 +30,14 @@ router.get('/scrape', async (req, res) => {
 				// grabs image element for image
 				let imgSrc = $(elem).find('img').attr('src');
 				// grabs a element and url fragment for link
-				let link = $(elem).find('a').attr('href');
+				let link = 'https://nytimes.com' + $(elem).find('a').attr('href');
 
 				//NOTE :: Debug
-				console.log('Headline::', headline);
-				console.log('Summary::', summary);
-				console.log('Link::', link);
-				console.log('imgSrc::', imgSrc);
-				console.log('------------------------------');
+				// console.log('Headline::', headline);
+				// console.log('Summary::', summary);
+				// console.log('Link::', link);
+				// console.log('imgSrc::', imgSrc);
+				// console.log('------------------------------');
 
 				// gathers all elements and pushes it to the results array
 				// results.push({
@@ -46,28 +47,37 @@ router.get('/scrape', async (req, res) => {
 				// 	link: 'https://nytimes.com/' + link,
 				// });
 
+				// console.log(results);
+
+				// passes results back to client
+				// res.send(results);
+
 				// inserts article into mongoDB
-				await db.Article.create({
-					headline,
-					summary,
-					link,
-					imgSrc
-				});
 
-				const testArticle = await db.Article.find({headline});
-				console.log('testArticle::', testArticle);
+				//TODO :: prevent duplicate documents from being inserted
+				if(await db.Article.count({headline}) > 0) {
+					console.log('already created');
+				} else {
+					console.log('creating');
+					await db.Article.create({
+						headline,
+						summary,
+						link,
+						imgSrc,
+					});
+				}
 			});
-
-		
-		// console.log(results);
-
-		// passes results back to client
-		// res.send(results);
-
-
 	} catch (error) {
 		console.log(error);
 	}
 });
+
+const containsArticle = async (headline) => {
+	// checks if db contains an article with specified headline
+	const test = await db.Article.find({ headline: headline });
+	console.log(test);
+	if (test.length > 0) return true;
+	return false;
+};
 
 module.exports = router;
