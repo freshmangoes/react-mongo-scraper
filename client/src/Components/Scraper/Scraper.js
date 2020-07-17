@@ -7,7 +7,7 @@ const Scraper = () => {
 	const testScraper = async () => {
 		try {
 			// gets response from API endpoint '/scrape/
-			const response = await API.scrape();
+			const response = await API.dbArticles();
 
 			// NOTE :: DEBUG
 			console.log('response.data::', ...response.data);

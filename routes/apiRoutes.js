@@ -7,7 +7,6 @@ const cheerio = require('cheerio');
 const router = require('express').Router();
 
 const db = require('../models');
-const e = require('express');
 
 router.get('/scrape', async (req, res) => {
 	const url = 'https://www.nytimes.com/section/world';
@@ -55,7 +54,7 @@ router.get('/scrape', async (req, res) => {
 				// inserts article into mongoDB
 
 				//TODO :: prevent duplicate documents from being inserted
-				if(await db.Article.count({headline}) > 0) {
+				if ((await db.Article.count({ headline })) > 0) {
 					console.log('already created');
 				} else {
 					console.log('creating');
@@ -72,12 +71,17 @@ router.get('/scrape', async (req, res) => {
 	}
 });
 
-const containsArticle = async (headline) => {
-	// checks if db contains an article with specified headline
-	const test = await db.Article.find({ headline: headline });
-	console.log(test);
-	if (test.length > 0) return true;
-	return false;
-};
+// route to get articles from MongoDB
+router.get('/dbArticles', async (req, res) => {
+	try {
+		// gets all articles
+		const result = await db.Article.find({});
+		// passes result back to client
+		res.send(result);
+	} catch (err) {
+		console.log('Error getting articles from database');
+		console.log(err);
+	}
+});
 
 module.exports = router;
