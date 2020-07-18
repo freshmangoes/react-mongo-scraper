@@ -9,7 +9,6 @@ const Scraper = () => {
 		try {
 			// gets response from API endpoint '/scrape/
 			const response = await API.dbArticles();
-
 			// sets state to response
 			setState([...response.data]);
 		} catch (err) {
@@ -24,9 +23,8 @@ const Scraper = () => {
 			await API.scrape();
 			console.log('Done :)');
 			console.log('Getting articles from database...');
-			const dbRes = await API.dbArticles();
+			await getFromDb();
 			console.log('Done :)');
-			setState([...dbRes.data]);
 		} catch (err) {
 			console.log('Error scraping articles');
 			console.log(err);
