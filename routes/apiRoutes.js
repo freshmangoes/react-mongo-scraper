@@ -15,7 +15,6 @@ router.get('/scrape', async (req, res) => {
 		const data = await axios.get(url);
 		// console.log(data.data);
 		let $ = cheerio.load(data.data);
-		let results = [];
 		// scrapes through the #collection-world id
 		$('#collection-world')
 			// finds each article element
@@ -31,29 +30,7 @@ router.get('/scrape', async (req, res) => {
 				// grabs a element and url fragment for link
 				let link = 'https://nytimes.com' + $(elem).find('a').attr('href');
 
-				//NOTE :: Debug
-				// console.log('Headline::', headline);
-				// console.log('Summary::', summary);
-				// console.log('Link::', link);
-				// console.log('imgSrc::', imgSrc);
-				// console.log('------------------------------');
-
-				// gathers all elements and pushes it to the results array
-				// results.push({
-				// 	headline,
-				// 	summary,
-				// 	imgSrc,
-				// 	link: 'https://nytimes.com/' + link,
-				// });
-
-				// console.log(results);
-
-				// passes results back to client
-				// res.send(results);
-
-				// inserts article into mongoDB
-
-				//TODO :: prevent duplicate documents from being inserted
+				// prevents duplicate articles from being inserted
 				if ((await db.Article.count({ headline })) > 0) {
 					console.log('already created');
 				} else {
@@ -66,6 +43,7 @@ router.get('/scrape', async (req, res) => {
 					});
 				}
 			});
+		res.send(200);
 	} catch (error) {
 		console.log(error);
 	}

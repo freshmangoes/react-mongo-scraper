@@ -1,13 +1,13 @@
 // connect api endpoints here
 
-import axios from "axios";
+import axios from 'axios';
 
 export default {
-  scrape: function() {
-    return axios.get('/scrape');
-  },
+	scrape: function () {
+		return axios.get('/scrape');
+	},
 
-  dbArticles: function() {
-    return axios.get('/dbArticles');
-  }
-}
+	dbArticles: function () {
+		return axios.get('/dbArticles');
+	},
+};
