@@ -49,13 +49,7 @@ const Scraper = () => {
 	// }, []);
 
 	return (
-		<Container
-			fluid="md"
-			style={{
-				justifyContent: 'center',
-				alignItems: 'center',
-			}}
-		>
+		<Container fluid="md">
 			<Row>
 				<Col>
 					<Button
@@ -69,20 +63,20 @@ const Scraper = () => {
 				</Col>
 			</Row>
 			{/* maps through array */}
-			{state.map((article) => {
-				return (
-					<Row>
-						<Col>
+			<Row>
+				<Col>
+					{state.map((article) => {
+						return (
 							<ArticleBox
 								headline={article.headline}
 								summary={article.summary}
 								link={article.link}
 								imgSrc={article.imgSrc}
 							/>
-						</Col>
-					</Row>
-				);
-			})}
+						);
+					})}
+				</Col>
+			</Row>
 		</Container>
 	);
 };

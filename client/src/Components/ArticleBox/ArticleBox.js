@@ -5,8 +5,8 @@ import Card from 'react-bootstrap/Card';
 const ArticleBox = (props) => {
 	const { headline, summary, link, imgSrc } = props;
 	return (
-		<div style={{ maxWidth: '600px'}} className='justify-'>
-			<Card className='m-3'>
+		<div>
+			<Card className='m-3 text-left'>
 				<Card.Img
 					variant="top"
 					src={imgSrc}
