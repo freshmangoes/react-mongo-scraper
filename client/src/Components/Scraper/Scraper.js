@@ -43,10 +43,9 @@ const Scraper = () => {
 		}
 	};
 
-	// TODO :: this currently just calls getFromDb(), which will eventually render data from the DB instead of directly scraped data
-	// useEffect(() => {
-	// 	getFromDb();
-	// }, []);
+	useEffect(() => {
+		getFromDb();
+	}, []);
 
 	return (
 		<Container fluid="md">
