@@ -1,12 +1,15 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+// import Moment from 'react-moment';
 
 const ArticleBox = (props) => {
-	const { headline, summary, link, imgSrc } = props;
+	const { headline, summary, link, imgSrc, timestamp } = props;
+	const date = new Date(timestamp).toUTCString();
+
 	return (
 		<div>
-			<Card className='m-3 text-left'>
+			<Card className="m-3 text-left">
 				<Card.Img
 					variant="top"
 					src={imgSrc}
@@ -20,6 +23,7 @@ const ArticleBox = (props) => {
 					<Button variant="outline-info">
 						<a href={link}>Link to article</a>
 					</Button>
+					<Card.Footer className="mt-2">Date added to db: {date}</Card.Footer>
 				</Card.Body>
 			</Card>
 			{/* <h2>{headline}</h2>

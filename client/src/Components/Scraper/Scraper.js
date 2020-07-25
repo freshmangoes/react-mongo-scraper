@@ -71,6 +71,7 @@ const Scraper = () => {
 								summary={article.summary}
 								link={article.link}
 								imgSrc={article.imgSrc}
+								timestamp={article.timestamp}
 							/>
 						);
 					})}

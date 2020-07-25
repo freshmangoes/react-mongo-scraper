@@ -6,6 +6,7 @@ const articleSchema = new Schema({
 	summary: { type: String, required: true },
 	link: { type: String, required: true },
 	imgSrc: { type: String, required: true },
+	timestamp: { type: Date, default: Date.now(), required: true },
 	// createdAt: {type: Date, required: true, default: Date.now}
 });
 

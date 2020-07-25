@@ -5,6 +5,7 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
 const router = require('express').Router();
+const moment = require('moment');
 
 const db = require('../models');
 
@@ -29,6 +30,7 @@ router.get('/scrape', async (req, res) => {
 				let imgSrc = $(elem).find('img').attr('src');
 				// grabs a element and url fragment for link
 				let link = 'https://nytimes.com' + $(elem).find('a').attr('href');
+				// let timestamp = moment.unix();
 
 				// prevents duplicate articles from being inserted
 				if ((await db.Article.count({ headline })) > 0) {
@@ -40,10 +42,11 @@ router.get('/scrape', async (req, res) => {
 						summary,
 						link,
 						imgSrc,
+						// timestamp,
 					});
 				}
 			});
-		res.send(200);
+		res.sendStatus(200);
 	} catch (error) {
 		console.log(error);
 	}
@@ -53,8 +56,7 @@ router.get('/scrape', async (req, res) => {
 router.get('/dbArticles', async (req, res) => {
 	try {
 		// gets all articles
-		const result = await db.Article.find({});
-		// passes result back to client
+		const result = await db.Article.find({}).sort({"timestamp": 1});
 		res.send(result);
 	} catch (err) {
 		console.log('Error getting articles from database');
