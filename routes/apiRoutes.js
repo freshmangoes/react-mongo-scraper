@@ -5,7 +5,6 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
 const router = require('express').Router();
-const moment = require('moment');
 
 const db = require('../models');
 
