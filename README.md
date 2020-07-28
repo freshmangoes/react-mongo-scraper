@@ -1,10 +1,11 @@
-# Create React Express App
+# New York Times Scraper
 
-## About This Boilerplate
-
-This setup allows for a Node/Express/React app which can be easily deployed to Heroku.
-
-The front-end React app will auto-reload as it's updated via webpack dev server, and the backend Express app will auto-reload independently with nodemon.
+## Technologies Used
+* MERN stack
+* Express for server backend and proxying API requests
+* React & react-bootstrap for a tidy front end
+* Mongo to store data from the API requests
+* Cheerio and axios to download and scrape the target webpage
 
 ## Starting the app locally
 
@@ -22,9 +23,9 @@ After both installations complete, run the following command in your terminal:
 npm start
 ```
 
-Your app should now be running on <http://localhost:3000>. The Express server should intercept any AJAX requests from the client.
+Your app should now be running on <http://localhost:3000>.
 
-## Deployment (Heroku)
+## [Live Deployed Link](https://nyt-scraper-kcilia.herokuapp.com/)
 
-To deploy, simply add and commit your changes, and push to Heroku. As is, the NPM scripts should take care of the rest.
-# MERN-template
+# Demo
+![Example Gif](./nyt-scraper.gif)
