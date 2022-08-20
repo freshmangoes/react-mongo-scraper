@@ -10,4 +10,8 @@ export default {
 	dbArticles: function () {
 		return axios.get('/dbArticles');
 	},
+
+	deleteArticles: function () {
+		return axios.get('/deleteArticles');
+	},
 };
