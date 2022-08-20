@@ -30,18 +30,39 @@ const Scraper = () => {
 			await API.scrape();
 
 			// Debug
-			console.log('Done :)');
-			console.log('Getting articles from database...');
+			console.log('Done scraping TRACER 1');
+			console.log('Getting articles from database');
 
 			await getFromDb();
 
 			// Debug
-			console.log('Done :)');
+			console.log('Application refreshed scrapeArticles()');
 		} catch (err) {
 			console.log('Error scraping articles');
 			console.log(err);
 		}
 	};
+
+	const deleteArticles = async () => {
+		try {
+			// Debug
+			console.log('Deleting all articles');
+			
+			await API.delete();
+
+			// Debug
+			console.log('Done deleting TRACER 1');
+			console.log('Refreshing application');
+
+			await getFromDb();
+
+			// Debug
+			console.log('Application refreshed deleteArticles()');
+		} catch (err) {
+			console.log('Error deleting articles');
+			console.log(err);
+		}
+	}
 
 	useEffect(() => {
 		getFromDb();
@@ -59,6 +80,16 @@ const Scraper = () => {
 					>
 						<h1>Scrape for New Articles</h1>
 					</Button>
+
+					<Button
+						variant="outline-primary"
+						size="lg"
+						className="m-3"
+						onClick={() => deleteArticles()}
+					>
+						<h1>Delete All Articles</h1>
+					</Button>
+					
 				</Col>
 			</Row>
 			{/* maps through array */}

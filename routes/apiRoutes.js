@@ -63,4 +63,16 @@ router.get('/dbArticles', async (req, res) => {
 	}
 });
 
+
+// route to delete all articles from MongoDB
+router.delete('/deleteArticles', async (req, res) => {
+	try {
+		const result = await db.Article.deleteMany({});
+		res.send(result);
+	} catch (err) {
+		console.log('Error deleting articles from database');
+		console.log(err);
+	}
+})
+
 module.exports = router;
