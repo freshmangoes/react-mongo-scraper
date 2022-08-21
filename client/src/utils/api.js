@@ -12,6 +12,6 @@ export default {
 	},
 
 	deleteArticles: function () {
-		return axios.get('/deleteArticles');
+		return axios.delete('/deleteArticles');
 	},
 };

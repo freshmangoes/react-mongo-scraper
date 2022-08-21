@@ -48,7 +48,7 @@ const Scraper = () => {
 			// Debug
 			console.log('Deleting all articles');
 			
-			await API.delete();
+			await API.deleteArticles();
 
 			// Debug
 			console.log('Done deleting TRACER 1');
