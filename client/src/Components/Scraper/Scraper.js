@@ -74,24 +74,25 @@ const Scraper = () => {
 				<Col>
 					<Button
 						variant="outline-primary"
-						size="lg"
+						size="md"
 						className="m-3"
 						onClick={() => scrapeArticles()}
 					>
-						<h1>Scrape for New Articles</h1>
-					</Button>
-
+						<h3>Scrape Articles</h3>
+					</Button>					
+				</Col>
+				<Col>
 					<Button
 						variant="outline-primary"
-						size="lg"
+						size="md"
 						className="m-3"
 						onClick={() => deleteArticles()}
 					>
-						<h1>Delete All Articles</h1>
+						<h3>Delete Articles</h3>
 					</Button>
-					
 				</Col>
 			</Row>
+
 			{/* maps through array */}
 			<Row>
 				<Col>
